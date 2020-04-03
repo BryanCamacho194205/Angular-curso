@@ -1,0 +1,25 @@
+<mat-card class="card-product">
+    <mat-card-header>
+        <mat-card-title>{{ product.title | uppercase }}</mat-card-title>
+        <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+    </mat-card-header>
+    <div class="crop-image">
+        <img class="img-product" [src]="product.image" alt="">
+    </div>
+    <mat-card-content>
+			<strong>{{ product.price | currency }}</strong>
+			<p>{{ product.description | slice: 0:20 }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-raised-button color="primary" [routerLink]="['/products', product.id]">Detalle del producto</a>
+        <button mat-raised-button color="accent" (click)="addCart()">Agregar al carrito</button>
+    </mat-card-actions>
+</mat-card>
+<!-- <h3 appHighlight>{{ product.title | uppercase }}</h3> -->
+<!-- Las directivas modifican el comportamiento del DOM dinamicamente -->
+<!-- <img [src]="product.image" alt="">
+<strong>{{ product.price | currency }}</strong>
+<p>{{ product.description | slice: 0:10 }}</p>
+<p>{{ today | date: 'HH:mm' }}</p>
+<button mat-raised-button color="primary" (click)="addCart()">Agregar al carrito</button>
+<a [routerLink]="['/products', product.id]">Ver detalle</a> -->

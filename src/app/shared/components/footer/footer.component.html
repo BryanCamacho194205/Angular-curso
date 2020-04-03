@@ -1,0 +1,47 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="box">
+                    <h3>Productos</h3>
+                    <ul>
+                        <li>
+                            <a routerLink="/products" [queryParams]="{ type: 'news' }">Nuevos Productos</a>
+                        </li>
+                        <li>
+                            <a routerLink="/products" [queryParams]="{ type: 'offer' }">Ofertas</a>
+                        </li>
+                        <li>
+                            <a routerLink="/products" [queryParams]="{ type: 'latest' }">Lo más nuevo</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="box">
+                    <h3>Acerca de</h3>
+                    <h3>HanaBanana</h3>
+                    <ul>
+                        <li>
+                            <a routerLink="/about-us">Sobre nosotros</a>
+                        </li>
+                        <li>
+                            <a routerLink="/stores">Donde estamos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <div class="box">
+                    <h3>Contactos</h3>
+                    <mat-form-field>
+                        <mat-label style="color: white;">Email</mat-label>
+                        <input matInput [formControl]="emailField" type="text" />
+                    </mat-form-field>
+                    <button mat-flat-button color="accent" [disabled]="emailField.invalid" (click)="sendMail()">Enviar</button>
+                    <p *ngIf="emailField.invalid">El campo no es válido</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

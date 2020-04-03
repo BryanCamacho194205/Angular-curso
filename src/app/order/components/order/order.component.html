@@ -1,0 +1,55 @@
+<mat-horizontal-stepper>
+  <mat-step>
+    <ng-template matStepLabel> <!--Para ponerle un título al paso se usa ng-template-->
+      Sus Productos
+    </ng-template>
+    <div *ngIf="(products$ | async) as products">
+        <!-- <p *ngIf="(products$ | async).length === 0">No hay productos en el Carrito de compras</p>
+        <ul>
+            <li *ngFor="let product of (products$ | async)">
+                {{ product.title }}
+            </li>
+        </ul> -->
+        <!-- <p *ngIf="products.length === 0">No hay productos en el Carrito de compras</p>
+        <ul>
+            <li *ngFor="let product of products">
+                {{ product.title }}
+            </li>
+        </ul> -->
+    	<p *ngIf="products.length === 0">No has añadido productos al Carrito</p>
+    	<div class="row" *ngFor="let product of products | productsOrdered">
+    	  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    	    <div class="box">
+    	      <img [src]="product.image" alt="" class="image">
+    	    </div>
+    	  </div>
+    	  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-2">
+    	    <div class="box">
+    	      {{ product.title }}
+    	    </div>
+    	  </div>
+    	  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-3">
+    	    <div class="box">
+    	      <strong>Precio: </strong>{{ product.price | currency }}
+    	    </div>
+				</div>
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    	    <div class="box">
+    	      <strong>Cantidad: </strong>{{ product.quantity }}
+    	    </div>
+				</div>
+    	</div>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel> <!--Para ponerle un título al paso se usa ng-template-->
+      Datos Personales
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel> <!--Para ponerle un título al paso se usa ng-template-->
+      Forma de Pago
+    </ng-template>
+  </mat-step>
+</mat-horizontal-stepper>
+

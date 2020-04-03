@@ -1,0 +1,221 @@
+<!-- <fa-icon size="5x" [icon]="['fas', 'hand-point-left']" transform="rotate-{{magicLevel}}"></fa-icon>
+<input type='range' min="0" max="360" [value]="magicLevel" (input)="magicLevel=$event.target.value"/> -->
+<!-- <fa-icon size="6x" [icon]="['fas', 'sync']" [spin]="syncRunning"></fa-icon>
+  <ion-button (click)="syncRunning = true" [disabled]="syncRunning">Start</ion-button>
+	<ion-button (click)="syncRunning = false" [disabled]="!syncRunning">Stop</ion-button> -->
+
+<form [formGroup]="contactForm">
+<mat-tab-group mat-stretch-tabs class="contact-us">
+  <mat-tab label="Contactanos">
+		<mat-card class="card-contact-us">Nuestras redes</mat-card>
+		<div class="contact-us-card">
+			<mat-card class="card-contact-us">
+				<mat-icon>group</mat-icon>
+				HanaBanana
+			</mat-card>
+			<mat-card class="card-contact-us">
+				<mat-icon>group</mat-icon>
+				@HabaBananaEC
+			</mat-card>
+		</div>
+		<mat-card class="card-contact-us">Whatsapp</mat-card>
+		<div class="contact-us-card">
+		<mat-card class="card-contact-us">
+			<mat-icon>group</mat-icon>
+			+593 998 75 1292
+		</mat-card>
+		</div>
+  </mat-tab>
+  <mat-tab label="Nuestras Sedes">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 col-sm-12"
+				*ngFor="let branchOffice of branchOffices; let i = index">
+				<mat-card class="card">
+					<mat-card-header>
+						<div mat-card-avatar class="header-image"></div>
+						<mat-card-title> {{ branchOffice.name }}</mat-card-title>
+						<mat-card-subtitle>{{ branchOffice.address }}</mat-card-subtitle>
+					</mat-card-header>
+					<mat-card-content>
+						<img mat-card-image [src]="branchOffice.image" alt="">
+					</mat-card-content>
+					<mat-card-actions>
+						<button mat-stroked-button color="primary">LIKE</button>
+						<button mat-stroked-button color="accent">SHARE</button>
+					</mat-card-actions>
+				</mat-card>
+			</div>
+		</div>
+	</mat-tab>
+  <mat-tab label="Informanos de tus compras">
+		<mat-form-field class="contact-us-c">
+			<mat-label>
+				<mat-icon>person</mat-icon>
+				Nombre
+			</mat-label>
+			<input matInput formControlName="firstName">
+			<mat-error *ngIf="contactForm.controls['firstName'].hasError('required')">
+				Nombre <strong>requerido</strong>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="contact-us-c">
+			<mat-label>
+				<mat-icon>person</mat-icon>
+			Apellido
+			</mat-label>
+			<input matInput formControlName="lastName">
+			<mat-error *ngIf="contactForm.controls['lastName'].hasError('required')">
+				Apellido <strong>requerido</strong>
+			</mat-error>
+		</mat-form-field>
+
+		<mat-form-field class="contact-us-c">
+			<mat-label>
+				<mat-icon>shop</mat-icon>
+				Producto
+			</mat-label>
+			<mat-select formControlName="product">
+				<mat-option *ngFor="let product of products" [value]="product">
+					{{ product.name }}
+				</mat-option>
+			</mat-select>
+			<mat-error *ngIf="contactForm.controls['product'].hasError('required')">
+				Selecciona un <strong>producto</strong>
+			</mat-error>
+		</mat-form-field>
+
+    <mat-form-field class="contact-us-c">
+      <mat-label>
+				Cantidad
+			</mat-label>
+			<input type="number" [(ngModel)]="quantity" [ngModelOptions]="{standalone: true}" matInput>
+		</mat-form-field>
+
+		<button [disabled]="quantity < 1" mat-flat-button color="primary">
+        Enviar información
+    </button>
+  </mat-tab>
+  <mat-tab label="Problemas en la entrega de tu pedido?">
+    <mat-accordion class="headers-align">
+        <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Datos personales
+            </mat-panel-title>
+            <mat-panel-description class="panel-description">
+              Ingresa tu nombre y correo electrónico
+              <mat-icon>account_circle</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+					<mat-form-field>
+            <mat-label>
+                <mat-icon>person</mat-icon>
+                Nombre Completo
+            </mat-label>
+						<input matInput formControlName="name">
+            <mat-error *ngIf="contactForm.controls['name'].hasError('required')">
+              Nombre y apellido <strong>requeridos</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>
+                <mat-icon>email</mat-icon>
+                Correo Electrónico
+            </mat-label>
+						<input placeholder="example@hotmail.com" matInput formControlName="email">
+						<mat-error *ngIf="contactForm.controls['email'].hasError('required')">
+							Correo electrónico <strong>requerido</strong>
+						</mat-error>
+          </mat-form-field>
+
+          <mat-action-row>
+            <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Ubicación
+                </mat-panel-title>
+                <mat-panel-description>
+                    Ingresa tu Dirección
+                    <mat-icon>map</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+                <mat-label>
+                    <mat-icon>add_location</mat-icon>
+                    Ubicación
+								</mat-label>
+                <mat-select formControlName="city">
+                    <mat-option *ngFor="let city of cities" [value]="city">
+                    {{ city.name }} - {{ city.canton }}
+                    </mat-option>
+								</mat-select>
+								<mat-error *ngIf="contactForm.controls['city'].hasError('required')">
+									Ciudad <strong>requerida</strong>
+								</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>
+                  <mat-icon>directions</mat-icon>
+                  Dirección
+              </mat-label>
+							<input matInput formControlName="address">
+							<mat-error *ngIf="contactForm.controls['address'].hasError('required')">
+								Direccion <strong>requerida</strong>
+							</mat-error>
+            </mat-form-field>
+
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+                <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+            </mat-action-row>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Inconveniente en el pedido
+                </mat-panel-title>
+                <mat-panel-description>
+                    Cuando hiciste tu pedido
+                    <mat-icon>date_range</mat-icon>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <mat-form-field>
+                <mat-label>
+                    <mat-icon>list_alt</mat-icon>
+                    Fecha
+                </mat-label>
+                <input matInput formControlName="date" [matDatepicker]="picker" (focus)="picker.open()" readonly>
+								<mat-datepicker #picker></mat-datepicker>
+								<mat-error *ngIf="contactForm.controls['date'].hasError('required')">
+									Fecha <strong>requerida</strong>
+								</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label style="font-size: x-small; color: red;">
+                    <mat-icon>comment</mat-icon>
+                    Problema
+                </mat-label>
+                <textarea matInput></textarea>
+            </mat-form-field>
+
+            <mat-action-row>
+                <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+            </mat-action-row>
+				</mat-expansion-panel>
+				<button mat-raised-button color="primary" class="sendInfo">Enviar Información</button>
+    </mat-accordion>
+	</mat-tab>
+</mat-tab-group>
+</form>

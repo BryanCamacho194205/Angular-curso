@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="login($event)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Iniciar Sesión</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <div class="col-sx">
+                    <mat-form-field>
+                        <mat-label>Correo electrónico</mat-label>
+                        <input type="email" formControlName="email" matInput>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs">
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input type="password" formControlName="password" matInput>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [disabled]="form.invalid" mat-raised-button color="primary" type="submit">Iniciar Sesión</button>
+        </mat-card-actions>
+    </mat-card>
+</form>
+

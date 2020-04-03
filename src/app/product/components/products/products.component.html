@@ -1,0 +1,7 @@
+<div class="row">
+    <app-product class="col-lg-4 col-md-6 col-sm-12"
+      *ngFor="let product of products" 
+      (productClicked)="clickedProduct($event)" 
+      [product]="product">
+    </app-product>
+  </div>
