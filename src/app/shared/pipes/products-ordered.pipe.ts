@@ -19,7 +19,7 @@ export class ProductsOrderedPipe implements PipeTransform {
 					this.groupedProducts[repeatedProduct].quantity += 1;
 				}
 			}
-		})
+		});
 		return this.groupedProducts;
   }
 }
